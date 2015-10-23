@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestTimeConsuming(t *testing.T) {
+func TestEnvVarMatchingFieldName(t *testing.T) {
 	os.Setenv("FeatureA", "1")
 	m := Features{}
 	Read(&m)
@@ -19,7 +19,19 @@ func TestTimeConsuming(t *testing.T) {
 	}
 }
 
+func TestEnvVarTagging(t *testing.T) {
+	os.Setenv("feature_env", "1")
+	m := Features{}
+	Read(&m)
+
+	if !m.FeatureEnv.IsEnabled() {
+		t.Fatal("FeatureEnv was not set")
+	}
+}
+
 type Features struct {
 	FeatureA Feature
 	FeatureB Feature
+
+	FeatureEnv Feature `env:"feature_env"`
 }

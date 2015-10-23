@@ -18,15 +18,19 @@ func Read(obj interface{}) {
 	for i := 0; i < typ.NumField(); i++ {
 		if typ.Field(i).Type.Implements(fType) {
 			fieldValue := val.Field(i)
-			fieldName := typ.Field(i).Name
+			fieldName := typ.Field(i)
 			createField(fieldValue, fieldName)
 
 		}
 	}
 }
 
-func createField(v reflect.Value, name string) {
-	envVariable := os.Getenv(name) == "1"
+func createField(v reflect.Value, field reflect.StructField) {
+	var varName = field.Tag.Get("env")
+	if varName == "" {
+		varName = field.Name
+	}
+	envVariable := os.Getenv(varName) == "1"
 	v.Set(reflect.ValueOf(staticValueFeatur{envVariable}))
 }
 
