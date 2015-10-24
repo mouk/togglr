@@ -7,6 +7,7 @@ import (
 
 func TestEnvVarMatchingFieldName(t *testing.T) {
 	os.Setenv("FeatureA", "1")
+	os.Setenv("FeatureB", "0")
 	m := Features{}
 	Read(&m)
 
@@ -21,6 +22,7 @@ func TestEnvVarMatchingFieldName(t *testing.T) {
 
 func TestEnvVarTagging(t *testing.T) {
 	os.Setenv("feature_env", "1")
+	os.Setenv("FeatureB", "0")
 	m := Features{}
 	Read(&m)
 
@@ -30,8 +32,8 @@ func TestEnvVarTagging(t *testing.T) {
 }
 
 type Features struct {
-	FeatureA Feature
-	FeatureB Feature
+	FeatureA Feature `env:"FeatureA"`
+	FeatureB Feature `env:"FeatureB"`
 
 	FeatureEnv Feature `env:"feature_env"`
 }

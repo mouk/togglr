@@ -25,19 +25,33 @@ func Read(obj interface{}) {
 	}
 }
 
-func createField(v reflect.Value, field reflect.StructField) {
+func createFeatureFromEnv(field reflect.StructField) (Feature, bool) {
 	var varName = field.Tag.Get("env")
 	if varName == "" {
-		varName = field.Name
+		return nil, false
 	}
 	envVariable := os.Getenv(varName) == "1"
-	v.Set(reflect.ValueOf(staticValueFeatur{envVariable}))
+	return staticValueFeature{envVariable}, true
+}
+func createField(v reflect.Value, field reflect.StructField) {
+	if featur, ok := createFeatureFromEnv(field); ok {
+		v.Set(reflect.ValueOf(featur))
+		return
+	}
+
+	if featur, ok := createFeatureFromJson(field); ok {
+		v.Set(reflect.ValueOf(featur))
+		return
+	}
+	v.Set(reflect.ValueOf(DisabledFeature))
 }
 
-type staticValueFeatur struct {
+type staticValueFeature struct {
 	Value bool
 }
 
-func (d staticValueFeatur) IsEnabled() bool {
+func (d staticValueFeature) IsEnabled() bool {
 	return d.Value
 }
+
+var DisabledFeature = staticValueFeature{false}
