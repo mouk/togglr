@@ -1,6 +1,14 @@
 # togglr
 A simple implementation of the Feature Toggles pattern for Golang
 
+
+## Feature list
+- [X] Configure from environment variables
+- [X] Configure from JSON file
+- [ ] Percentage based configuration
+- [ ] Time base configuration
+
+
 ## Getting Started
 
 ~~~ go
