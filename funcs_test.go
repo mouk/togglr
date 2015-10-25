@@ -37,3 +37,16 @@ type Features struct {
 
 	FeatureEnv Feature `env:"feature_env"`
 }
+
+func TestStaticFeatures(t *testing.T) {
+	m := StaticFeatures{}
+	Read(&m)
+
+	if !m.On.IsEnabled() {
+		t.Fatal("On was not set")
+	}
+}
+
+type StaticFeatures struct {
+	On AlwaysEnabledFeature
+}

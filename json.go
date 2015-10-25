@@ -27,5 +27,5 @@ func createFeatureFromJson(field reflect.StructField) (Feature, bool) {
 	if val, ok := jsonData[key]; ok {
 		return staticValueFeature{val == true}, true
 	}
-	return DisabledFeature, true
+	return AlwaysDisabledFeature, true
 }

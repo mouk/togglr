@@ -16,7 +16,8 @@ func Read(obj interface{}) {
 	fType := reflect.TypeOf((*Feature)(nil)).Elem()
 
 	for i := 0; i < typ.NumField(); i++ {
-		if typ.Field(i).Type.Implements(fType) {
+		t := typ.Field(i).Type
+		if t.Kind() == reflect.Interface && t.Implements(fType) {
 			fieldValue := val.Field(i)
 			fieldName := typ.Field(i)
 			createField(fieldValue, fieldName)
@@ -43,7 +44,7 @@ func createField(v reflect.Value, field reflect.StructField) {
 		v.Set(reflect.ValueOf(featur))
 		return
 	}
-	v.Set(reflect.ValueOf(DisabledFeature))
+	v.Set(reflect.ValueOf(AlwaysDisabledFeature))
 }
 
 type staticValueFeature struct {
@@ -54,4 +55,11 @@ func (d staticValueFeature) IsEnabled() bool {
 	return d.Value
 }
 
-var DisabledFeature = staticValueFeature{false}
+func CreateSimpleValueToggle(enabled bool) Feature {
+	if enabled {
+		return AlwaysEnabledFeature{}
+	}
+	return AlwaysDisabledFeature
+}
+
+var AlwaysDisabledFeature = staticValueFeature{false}
