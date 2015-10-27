@@ -5,6 +5,7 @@ A simple implementation of the Feature Toggles pattern for Golang
 ## Feature list
 - [X] Configure from environment variables
 - [X] Configure from JSON file
+- [X] Randomly enabled feature
 - [ ] Percentage based configuration
 - [ ] Time base configuration
 
