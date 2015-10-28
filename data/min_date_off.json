@@ -1,0 +1,8 @@
+{
+  "OffLong": {
+    "enabledOnOrAfter": "2016-01-02 15:04:05"
+  },
+  "OffShort": {
+    "enabledOnOrAfter": "2016-01-02"
+  }
+}
