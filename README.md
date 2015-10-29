@@ -1,4 +1,4 @@
-# togglr [![Build Status](https://travis-ci.org/mouk/togglr.svg?branch=master)](https://travis-ci.org/mouk/togglr)&nbsp;[![GoDoc](https://godoc.org/github.com/mouk/togglr?status.svg)](http://godoc.org/github.com/mouk/togglr)
+# togglr [![Build Status](https://travis-ci.org/mouk/togglr.svg?branch=master)](https://travis-ci.org/mouk/togglr)&nbsp;[![Coverage Status](https://coveralls.io/repos/mouk/togglr/badge.svg?branch=master&service=github)](https://coveralls.io/github/mouk/togglr?branch=master)&nbsp;[![GoDoc](https://godoc.org/github.com/mouk/togglr?status.svg)](http://godoc.org/github.com/mouk/togglr)
 A simple implementation of the Feature Toggles pattern for Golang
 
 
@@ -8,7 +8,7 @@ A simple implementation of the Feature Toggles pattern for Golang
 - [X] Randomly enabled feature
 - [X] Time base configuration
 - [X] Percentage based configuration
-- [ ] Week day bases configuration
+- [X] Week day based configuration
 
 
 ## Getting Started
