@@ -35,6 +35,9 @@ func createFeatureFromJson(field reflect.StructField) (Feature, bool) {
 		if feature, ok := createEnabledOnOrAfter(prop); ok {
 			return feature, ok
 		}
+		if feature, ok := createEnabledOnOrBefore(prop); ok {
+			return feature, ok
+		}
 		return staticValueFeature{val == true}, true
 	}
 	return nil, false
