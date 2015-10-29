@@ -1,0 +1,11 @@
+{
+  "AlwayOn": {
+    "percent": 100
+  },
+  "AlwaysOff": {
+    "percent": 0
+  },
+  "FiftyFifty": {
+    "percent": 50
+  }
+}

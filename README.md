@@ -7,7 +7,7 @@ A simple implementation of the Feature Toggles pattern for Golang
 - [X] Configure from JSON file
 - [X] Randomly enabled feature
 - [X] Time base configuration
-- [ ] Percentage based configuration
+- [X] Percentage based configuration
 - [ ] Week day bases configuration
 
 
@@ -23,7 +23,7 @@ type MyFeatures struct{
 }
 
 func main() {
-  features = MyFeatures{}
+  features := MyFeatures{}
   togglr.Read(&features)
 
 
