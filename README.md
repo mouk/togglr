@@ -13,21 +13,43 @@ A simple implementation of the Feature Toggles pattern for Golang
 
 ## Getting Started
 
+At first create a struct containing the features you want to be able to toggle:
+
+~~~ go
+type MyFeatures struct{
+  SimpleFeature togglr.Feature
+  EnabledOnOrBefore togglr.Feature
+  EnabledOnOrAfter togglr.Feature
+  FiftyFifty togglr.Feature
+  OnlyOnWeekend togglr.Feature
+  FeatureFromEnv togglr.Feature `env:"FEATURE"`
+}
+~~~
+
+Then create a json file configuring thoses feature by thier names:
+
+```json
+{
+  "SimpleFeature": true,
+  "EnabledOnOrBefore": { "enabledOnOrBefore": "2006-01-02 15:04:05" },
+  "EnabledOnOrAfter": { "enabledOnOrAfter": "2016-01-02" },
+  "FiftyFifty": { "percent": 50 },
+  "OnlyOnWeekend" : { "days": "Saturday | Sunday" }
+}
+```
+Almost done. Now just fil the feature sruct and use it
+
 ~~~ go
 package main
 
 import "github.com/mouk/togglr"
-type MyFeatures struct{
-  Feature1 togglr.Feature
-  Feature2 togglr.Feature `env:"f2"`
-}
 
 func main() {
   features := MyFeatures{}
+  togglr.Init("feature_configuration.json")
   togglr.Read(&features)
 
-
-  if(features.Feature1.IsEnabled()){
+  if(features.EnabledOnOrBefore.IsEnabled()){
     // Do somthing
   }
 }
