@@ -4,8 +4,6 @@ import (
 	"time"
 )
 
-var EnabledOnOrAfterKey = "enabledOnOrAfter"
-
 func createEnabledOnOrAfter(val map[string]interface{}) (Feature, bool) {
 	if date, ok := val[EnabledOnOrAfterKey]; ok {
 		dateRaw := date.(string)

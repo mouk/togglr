@@ -26,7 +26,7 @@ func createFeature(field reflect.StructField) (Feature, bool) {
 }
 
 func getConfig(name string, tag reflect.StructTag) (interface{}, bool) {
-	if val, ok := EnvSource.GetConfig(name, tag); ok {
+	if val, ok := singltonEnvSource.GetConfig(name, tag); ok {
 		return val, ok
 	}
 	if val, ok := source.GetConfig(name, tag); ok {

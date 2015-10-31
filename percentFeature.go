@@ -2,8 +2,6 @@ package togglr
 
 import "math/rand"
 
-var PercentKey = "percent"
-
 func createPercentFeature(val map[string]interface{}) (Feature, bool) {
 	if percentRaw, ok := val[PercentKey]; ok {
 		percent := int(percentRaw.(float64))

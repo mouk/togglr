@@ -2,9 +2,9 @@ package togglr
 
 import "math/rand"
 
-type RandomFeature struct {
+type randomFeature struct {
 }
 
-func (f RandomFeature) IsEnabled() bool {
+func (random randomFeature) IsEnabled() bool {
 	return rand.Int()%2 == 0
 }

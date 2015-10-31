@@ -5,8 +5,6 @@ import (
 	"time"
 )
 
-var WeekdaysKey = "days"
-
 func createWeekdaysFeature(val map[string]interface{}) (Feature, bool) {
 	if daysRaw, ok := val[WeekdaysKey]; ok {
 		activeOnWeekdays := make(map[time.Weekday]bool)

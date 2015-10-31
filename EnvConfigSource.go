@@ -16,4 +16,4 @@ func (source envSource) GetConfig(name string, tag reflect.StructTag) (interface
 	return os.Getenv(varName) == "1", true
 }
 
-var EnvSource = envSource{}
+var singltonEnvSource = envSource{}

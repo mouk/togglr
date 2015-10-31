@@ -6,7 +6,7 @@ import (
 	"reflect"
 )
 
-type JsonConfigSource struct {
+type jsonConfigSource struct {
 	jsonData map[string]interface{}
 }
 
@@ -15,10 +15,10 @@ func NewJsonConfigSource(path string) ConfigSource {
 	//todo handles errors
 	jsonData := make(map[string]interface{})
 	json.Unmarshal(file, &jsonData)
-	return JsonConfigSource{jsonData}
+	return jsonConfigSource{jsonData}
 }
 
-func (source JsonConfigSource) GetConfig(name string, tag reflect.StructTag) (interface{}, bool) {
+func (source jsonConfigSource) GetConfig(name string, tag reflect.StructTag) (interface{}, bool) {
 	key := tag.Get("json")
 	if key == "" {
 		key = name

@@ -4,11 +4,6 @@ import (
 	"reflect"
 )
 
-type FeatureSnapshot struct {
-	FeatureName string
-	Value       bool
-}
-
 func GetFeatureSpanshots(obj interface{}) map[string]bool {
 	typ := reflect.TypeOf(obj)
 	val := reflect.ValueOf(obj)

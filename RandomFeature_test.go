@@ -27,9 +27,8 @@ func TestRandom(t *testing.T) {
 	if !(on && off) {
 		t.Fatal("Not all cases were found")
 	}
-
 }
 
 type FeaturesRandom struct {
-	F1 RandomFeature
+	F1 randomFeature
 }

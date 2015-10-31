@@ -39,5 +39,3 @@ type staticValueFeature struct {
 func (d staticValueFeature) IsEnabled() bool {
 	return d.Value
 }
-
-var AlwaysDisabledFeature = staticValueFeature{false}
