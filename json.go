@@ -1,14 +1,13 @@
 package togglr
 
 import (
-	"github.com/mouk/togglr/json"
 	"reflect"
 )
 
 var source ConfigSource
 
 func Init(path string) {
-	source = json.NewJsonConfigSource(path)
+	source = NewJsonConfigSource(path)
 }
 
 func createFeatureFromJson(field reflect.StructField) (Feature, bool) {

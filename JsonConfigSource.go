@@ -1,4 +1,4 @@
-package json
+package togglr
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ type JsonConfigSource struct {
 	jsonData map[string]interface{}
 }
 
-func NewJsonConfigSource(path string) JsonConfigSource {
+func NewJsonConfigSource(path string) ConfigSource {
 	file, _ := ioutil.ReadFile(path)
 	//todo handles errors
 	jsonData := make(map[string]interface{})

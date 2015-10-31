@@ -1,7 +1,6 @@
 package togglr
 
 import (
-	"os"
 	"reflect"
 )
 
@@ -27,12 +26,11 @@ func Read(obj interface{}) {
 }
 
 func createFeatureFromEnv(field reflect.StructField) (Feature, bool) {
-	var varName = field.Tag.Get("env")
-	if varName == "" {
-		return nil, false
+	val, ok := EnvSource.GetConfig("", field.Tag)
+	if ok {
+		return staticValueFeature{val == true}, true
 	}
-	envVariable := os.Getenv(varName) == "1"
-	return staticValueFeature{envVariable}, true
+	return nil, false
 }
 func createField(v reflect.Value, field reflect.StructField) {
 	if featur, ok := createFeatureFromEnv(field); ok {
