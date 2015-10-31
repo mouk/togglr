@@ -1,7 +1,6 @@
 package togglr
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -14,7 +13,6 @@ func TestFeatureSnapshotst(t *testing.T) {
 		nil,
 	}
 	snaptshots := GetFeatureSpanshots(&m)
-	fmt.Println(snaptshots)
 
 	if f, ok := snaptshots["FeatureOn"]; !ok || !f {
 		t.Fatal("Snapshot FeatureOn wasn't set")

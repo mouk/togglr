@@ -44,7 +44,6 @@ func createField(v reflect.Value, field reflect.StructField) {
 		v.Set(reflect.ValueOf(featur))
 		return
 	}
-	v.Set(reflect.ValueOf(AlwaysDisabledFeature))
 }
 
 type staticValueFeature struct {
@@ -53,13 +52,6 @@ type staticValueFeature struct {
 
 func (d staticValueFeature) IsEnabled() bool {
 	return d.Value
-}
-
-func CreateSimpleValueToggle(enabled bool) Feature {
-	if enabled {
-		return AlwaysEnabledFeature{}
-	}
-	return AlwaysDisabledFeature
 }
 
 var AlwaysDisabledFeature = staticValueFeature{false}

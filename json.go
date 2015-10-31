@@ -44,7 +44,6 @@ func createFeatureFromJson(field reflect.StructField) (Feature, bool) {
 		if feature, ok := createWeekdaysFeature(prop); ok {
 			return feature, ok
 		}
-		return staticValueFeature{val == true}, true
 	}
 	return nil, false
 }
