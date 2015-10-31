@@ -32,3 +32,32 @@ func main() {
   }
 }
 ~~~
+
+
+## Export feature snapshot
+A static overview of all features can be exported as a dictionary.
+This should be used only for debugging and reporting puposes,
+but not to change the control flow.
+
+~~~ go
+package main
+
+import "github.com/mouk/togglr"
+
+type MyFeatures struct{
+  Feature1 togglr.Feature
+  //....
+}
+
+func main() {
+  togglr.Init("features.json")
+  features := MyFeatures{}
+  togglr.Read(&features)
+
+  snapshot = togglr.GetFeatureSpanshots(&features)
+
+  for feature, enabled := snapshot m {
+    fmt.Println("Feature:", feature, "Enabled:", enabled)
+  }
+}
+~~~
