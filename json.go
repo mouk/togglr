@@ -1,31 +1,21 @@
 package togglr
 
 import (
-	"encoding/json"
-	"io/ioutil"
+	"github.com/mouk/togglr/json"
 	"reflect"
 )
 
-var jsonData map[string]interface{}
+var source ConfigSource
 
-func Init(path string) error {
-	file, e := ioutil.ReadFile(path)
-	if e != nil {
-		return e
-	}
-	jsonData = make(map[string]interface{})
-	json.Unmarshal(file, &jsonData)
-	return nil
+func Init(path string) {
+	source = json.NewJsonConfigSource(path)
 }
 
 func createFeatureFromJson(field reflect.StructField) (Feature, bool) {
-
-	key := field.Tag.Get("json")
-	if key == "" {
-		key = field.Name
-	}
+	name := field.Name
+	tag := field.Tag
 	//todo detect the type
-	if val, ok := jsonData[key]; ok {
+	if val, ok := source.GetConfig(name, tag); ok {
 		if val == true {
 			return staticValueFeature{true}, true
 		} else if val == false {
