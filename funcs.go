@@ -25,20 +25,8 @@ func Read(obj interface{}) {
 	}
 }
 
-func createFeatureFromEnv(field reflect.StructField) (Feature, bool) {
-	val, ok := EnvSource.GetConfig("", field.Tag)
-	if ok {
-		return staticValueFeature{val == true}, true
-	}
-	return nil, false
-}
 func createField(v reflect.Value, field reflect.StructField) {
-	if featur, ok := createFeatureFromEnv(field); ok {
-		v.Set(reflect.ValueOf(featur))
-		return
-	}
-
-	if featur, ok := createFeatureFromJson(field); ok {
+	if featur, ok := createFeature(field); ok {
 		v.Set(reflect.ValueOf(featur))
 		return
 	}

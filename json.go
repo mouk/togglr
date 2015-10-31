@@ -5,34 +5,32 @@ import (
 )
 
 var source ConfigSource
+var factories = make([]FeatureFactory, 0, 2)
 
 func Init(path string) {
 	source = NewJsonConfigSource(path)
 }
 
-func createFeatureFromJson(field reflect.StructField) (Feature, bool) {
+func createFeature(field reflect.StructField) (Feature, bool) {
 	name := field.Name
 	tag := field.Tag
-	//todo detect the type
+	f := append(factories, DefaulFactory)
+	for _, factory := range f {
+		if val, ok := getConfig(name, tag); ok {
+			if feature, ok := factory(val); ok {
+				return feature, ok
+			}
+		}
+	}
+	return nil, false
+}
+
+func getConfig(name string, tag reflect.StructTag) (interface{}, bool) {
+	if val, ok := EnvSource.GetConfig(name, tag); ok {
+		return val, ok
+	}
 	if val, ok := source.GetConfig(name, tag); ok {
-		if val == true {
-			return staticValueFeature{true}, true
-		} else if val == false {
-			return staticValueFeature{false}, true
-		}
-		prop := val.(map[string]interface{})
-		if feature, ok := createEnabledOnOrAfter(prop); ok {
-			return feature, ok
-		}
-		if feature, ok := createEnabledOnOrBefore(prop); ok {
-			return feature, ok
-		}
-		if feature, ok := createPercentFeature(prop); ok {
-			return feature, ok
-		}
-		if feature, ok := createWeekdaysFeature(prop); ok {
-			return feature, ok
-		}
+		return val, ok
 	}
 	return nil, false
 }
