@@ -5,7 +5,6 @@ import (
 )
 
 var source ConfigSource
-var factories = make([]FeatureFactory, 0, 2)
 
 func Init(path string) {
 	source = NewJsonConfigSource(path)

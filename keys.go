@@ -1,7 +1,8 @@
 package togglr
+
 const (
-  EnabledOnOrAfterKey = "enabledOnOrAfter"
-  EnabledOnOrBeforeKey = "enabledOnOrBefore"
-  WeekdaysKey = "days"
-  PercentKey = "percent"
+	EnabledOnOrAfterKey  = "enabledOnOrAfter"
+	EnabledOnOrBeforeKey = "enabledOnOrBefore"
+	WeekdaysKey          = "days"
+	PercentKey           = "percent"
 )

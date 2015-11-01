@@ -3,6 +3,7 @@ package togglr
 import (
 	"reflect"
 )
+
 //Populate the passed object with feature using the already
 //specified ConfigSources and FeatureFactories
 func Read(obj interface{}) {
