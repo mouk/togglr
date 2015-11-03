@@ -21,7 +21,7 @@ func createWeekdaysFeature(val map[string]interface{}) (Feature, bool) {
 		pred := func() bool {
 			return activeOnWeekdays[time.Now().Weekday()]
 		}
-		return predicateFeature{pred}, true
+		return newPredicateFeature(pred), true
 	}
 	return nil, false
 }

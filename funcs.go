@@ -38,6 +38,11 @@ type staticValueFeature struct {
 	Value bool
 }
 
-func (d staticValueFeature) IsEnabled() bool {
+//Create a new Feature with a static value that cannot be changed afterwards
+func NewStaticFeature(val bool) Feature {
+	return &staticValueFeature{val}
+}
+
+func (d *staticValueFeature) IsEnabled() bool {
 	return d.Value
 }

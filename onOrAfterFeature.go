@@ -17,8 +17,8 @@ func createEnabledOnOrAfter(val map[string]interface{}) (Feature, bool) {
 	return nil, false
 }
 func createEnabledOnOrAfterWithDate(t time.Time) Feature {
-	return predicateFeature{func() bool {
+	return newPredicateFeature(func() bool {
 		now := time.Now()
 		return now.After(t) || now.Equal(t)
-	}}
+	})
 }

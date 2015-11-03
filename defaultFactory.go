@@ -2,9 +2,9 @@ package togglr
 
 func DefaulFactory(val interface{}) (Feature, bool) {
 	if val == true {
-		return staticValueFeature{true}, true
+		return NewStaticFeature(true), true
 	} else if val == false {
-		return staticValueFeature{false}, true
+		return NewStaticFeature(false), true
 	}
 	prop := val.(map[string]interface{})
 	if feature, ok := createEnabledOnOrAfter(prop); ok {

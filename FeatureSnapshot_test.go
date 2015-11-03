@@ -7,8 +7,8 @@ import (
 func TestFeatureSnapshotst(t *testing.T) {
 
 	m := SnapshotFeature{
-		staticValueFeature{false},
-		staticValueFeature{true},
+		NewStaticFeature(false),
+		NewStaticFeature(true),
 		"Nothing",
 		nil,
 	}

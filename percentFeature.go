@@ -8,7 +8,7 @@ func createPercentFeature(val map[string]interface{}) (Feature, bool) {
 		pred := func() bool {
 			return rand.Intn(100) < percent
 		}
-		return predicateFeature{pred}, true
+		return newPredicateFeature(pred), true
 	}
 	return nil, false
 }
